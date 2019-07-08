@@ -291,13 +291,13 @@ df_upload <- reactive({
       # Avoid error message while file is not uploaded yet
       if (is.null(input$upload)) {
         return(data.frame(x = "Select your datafile", Wavelength=1,Abs=1, Em=1))
-      } else if (input$submit_datafile_button == 0) {
-        return(data.frame(x = "Press 'submit datafile' button"))
+#      } else if (input$submit_datafile_button == 0) {
+#        return(data.frame(x = "Press 'submit datafile' button"))
       } else {
         isolate({
           if (input$file_type == "text") {
             df <- read_delim(file_in$datapath,
-                               delim = input$upload_delim,
+                               delim = ",",
                                col_names = TRUE)
           } else if (input$file_type == "Excel") {
             df <- read_excel(file_in$datapath)
@@ -684,7 +684,7 @@ output$LegendText <- renderText({
 
 
     # End R-session when browser closed
-    session$onSessionEnded(stopApp)
+    # session$onSessionEnded(stopApp)
 ################################################
   
   } #close server
